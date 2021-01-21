@@ -1,0 +1,29 @@
+select guestname, guestaddress from guest where guestaddress like "%London" order by guestname;
+
+select * from room where (type = "double" or type = "family") and price<40 order by price;
+
+select * from booking where dateto is null;
+
+select avg(price) as avg_price from room;
+
+select sum(price) as total from room where type = "double";
+
+select count(*) from booking where "2020-08-01" between datefrom and dateto;
+
+select price, type from room join hotel on room.hotelno = hotel.hotelno where hotelname = "The Tower Hotel";
+
+select * from guest join booking on guest.guestno = booking.guestno join hotel on hotel.hotelno = booking.hotelno where hotelname = "The Tower Hotel" and "2020-01-21" between datefrom and dateto;
+
+select type, price, room.roomno from guest join booking on guest.guestno = booking.guestno join hotel on hotel.hotelno = booking.hotelno join room on room.roomno = booking.roomno where hotelname = "The Tower Hotel" and "2020-01-21" between datefrom and dateto;
+
+select sum(price) from guest join booking on guest.guestno = booking.guestno join hotel on hotel.hotelno = booking.hotelno join room on room.roomno = booking.roomno where hotelname = "The Tower Hotel" and "2020-01-21" between datefrom and dateto;
+
+select * from guest join booking on guest.guestno = booking.guestno join hotel on hotel.hotelno = booking.hotelno join room on room.roomno = booking.roomno where hotelname = "The Tower Hotel" and ("2020-01-21" < datefrom or "2020-01-21" > dateto) group by room.roomno;
+
+select sum(price) from guest join booking on guest.guestno = booking.guestno join hotel on hotel.hotelno = booking.hotelno join room on room.roomno = booking.roomno where hotelname = "The Tower Hotel" and ("2020-01-21" < datefrom or "2020-01-21" > dateto) group by room.roomno;
+
+select hotelname, count(*) as number_of_rooms from room join hotel on room.hotelno = hotel.hotelno group by hotelname;
+
+select * from (select count(*), type, hotelname from room join hotel on room.hotelno = hotel.hotelno join booking on booking.roomno = room.roomno group by hotelname, type order by count(*) desc) as sel1 group by hotelname;
+
+update room set price = price*1.05;
