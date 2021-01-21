@@ -1,0 +1,19 @@
+UNF: 
+DB(staffNo, dentistName, patientNo, patientName, appointment(date, time), surgeryNo)
+This is the unnormalized form of the data.
+
+1NF: 
+DB(staffNo, dentistName, *patientNo*, patientName, *appDate*, *appTime*, surgeryNo)
+I split the appointment group in two groups, so there are no nested groups. I also defined the primary key for the database.
+
+2NF: 
+Appointment(staffNo, *patientNo*, *appDate*, *appTime*)
+Dentist(*staffNo*, dentistName)
+Patient(*patientNo*, patientName, surgeryNo)
+I split the main table into three tables, so there are no partial dependencies in the main table and all data is dependant on the entire primary key.
+
+3NF: 
+Appointment(staffNo, *patientNo*, *appDate*, *appTime*)
+Dentist(*staffNo*, dentistName)
+Patient(*patientNo*, patientName, surgeryNo)
+3NF is the same as 2NF, because there are no transitive dependencies.
